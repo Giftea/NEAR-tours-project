@@ -185,7 +185,7 @@ export function rateTour(rate: Rate): string {
 // near call tourcontract.giftea.testnet unLikeTour '{"id": "0"}' --accountId=giftea.testnet
 // near call tourcontract.giftea.testnet unDislikeTour '{"id": "1"}' --accountId=giftea.testnet
 
-// near call tourcontract.giftea.testnet commentOnTour '{"comment": {"id": "1", "tourId": "0", "comment":"Annoying trip"} }' --accountId=firstcontract.giftea.testnet
+// near call tourcontract.giftea.testnet commentOnTour '{"comment": {"id": "1", "tourId": "0", "comment":"Not Bad"} }' --accountId=buyeraccount.giftea.testnet
 
 // near call tourcontract.giftea.testnet rateTour '{"rate": {"id": "3", "tourId": "0", "rate":2} }' --accountId=buyeraccount.giftea.testnet
 

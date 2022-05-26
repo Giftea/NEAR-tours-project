@@ -1,7 +1,7 @@
 import { PersistentUnorderedMap, u128, context } from "near-sdk-as";
 import { Comment } from "./commentModel";
 import { Rate } from "./rateModel";
-import { AccountId, tourID } from "../utils";
+import { tourID } from "../../../utils";
 
 class Stars  {
   star1: number;
