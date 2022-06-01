@@ -4,6 +4,15 @@
   "main": "index.js",
   "author": "Giftea",
   "license": "MIT",
+  "scripts": {
+    "dev": "watch -d -n 1 'clear && yarn test:unit'",
+    "asp": "asp --verbose --nologo",
+    "test:unit": "yarn asp -f unit.spec",
+    "build": "asb --target debug",
+    "build:release": "asb",
+    "test": "yarn build:release && yarn test:unit",
+    "clean": "rm -rf ./build && rm -rf ./neardev && rm -rf ./target"
+  },
   "devDependencies": {
     "near-sdk-as": "^3.2.3"
   }
