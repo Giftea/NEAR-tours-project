@@ -72,4 +72,4 @@ scripts
 └── README.md                     <-- instructions
 ```
 ## Deployed Contract Link
-[Check out the deployed Smart Contract on explorer.testnet.near.org](https://explorer.testnet.near.org/transactions/BjkA6K2azVTJ7mrEWrHpaQQCsgK4p41g4ZyC8kmsjGoF)
+[Check out the deployed Smart Contract on explorer.testnet.near.org](https://explorer.testnet.near.org/transactions/4Y8PBn45mJtyDD4ir1aopPkMNqZdfC2hwJrXhTxAi7cA)
