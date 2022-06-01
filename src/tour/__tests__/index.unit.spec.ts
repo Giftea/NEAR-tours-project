@@ -6,8 +6,6 @@ import {
   buyTour,
   deleteTour,
   likeTour,
-  unLikeTour,
-  unDislikeTour,
   dislikeTour,
   commentOnTour,
   rateTour,
@@ -111,33 +109,17 @@ describe("To like on a single Tour", () => {
     expect(response).toBe("You liked Tour with ID:" + tourIds[0]);
   });
 
+  it("unlikes on a single tour and returns a response", () => {
+    likeTour(tourIds[0]);
+    const response = likeTour(tourIds[0]);
+    expect(response).toBe("You unliked Tour with ID:" + tourIds[0]);
+  });
+
   it("Smart contract panics when there's no Tour with such ID", () => {
     function likeUnknownItem(): void {
       likeTour("ANC-0000001");
     }
     expect(likeUnknownItem).toThrow("This Tour doesn't exist");
-  });
-});
-
-// UNLIKE TOUR
-describe("To unlike on a single Tour", () => {
-  beforeEach(() => {
-    VMContext.setAttached_deposit(TxFee);
-    VMContext.setSigner_account_id(creator);
-
-    setTour(tour);
-  });
-
-  it("unlikes on a single tour and returns a response", () => {
-    const response = unLikeTour(tourIds[0]);
-    expect(response).toBe("You unliked Tour with ID:" + tourIds[0]);
-  });
-
-  it("Smart contract panics when there's no Tour with such ID", () => {
-    function unlikeUnknownItem(): void {
-      unLikeTour("ANC-0000001");
-    }
-    expect(unlikeUnknownItem).toThrow("This Tour doesn't exist");
   });
 });
 
@@ -155,33 +137,17 @@ describe("To dislike on a single Tour", () => {
     expect(response).toBe("You disliked Tour with ID:" + tourIds[0]);
   });
 
+  it("undislikes on a single tour and returns a response", () => {
+    dislikeTour(tourIds[0]);
+    const response = dislikeTour(tourIds[0]);
+    expect(response).toBe("You undisliked Tour with ID:" + tourIds[0]);
+  });
+
   it("Smart contract panics when there's no Tour with such ID", () => {
     function dislikeUnknownItem(): void {
       dislikeTour("ANC-0000001");
     }
     expect(dislikeUnknownItem).toThrow("This Tour doesn't exist");
-  });
-});
-
-// UNDISLIKE TOUR
-describe("To undislike on a single Tour", () => {
-  beforeEach(() => {
-    VMContext.setAttached_deposit(TxFee);
-    VMContext.setSigner_account_id(creator);
-
-    setTour(tour);
-  });
-
-  it("undislikes on a single tour and returns a response", () => {
-    const response = unDislikeTour(tourIds[0]);
-    expect(response).toBe("You undisliked Tour with ID:" + tourIds[0]);
-  });
-
-  it("Smart contract panics when there's no Tour with such ID", () => {
-    function undislikeUnknownItem(): void {
-      unDislikeTour("ANC-0000001");
-    }
-    expect(undislikeUnknownItem).toThrow("This Tour doesn't exist");
   });
 });
 

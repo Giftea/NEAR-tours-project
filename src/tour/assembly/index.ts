@@ -90,63 +90,52 @@ IMPRESSIONS ON TOUR
 export function likeTour(id: string): string {
   let storedTour = listedTours.getSome(id);
 
-  const opts = !storedTour.like.includes(context.sender);
-  const check = !storedTour.dislike.includes(context.sender);
-
-  assert(opts, "You have already liked this tour");
-
-  assert(check, "You have already made an impression on this tour");
-
-  const opt = storedTour.likeTour();
-
-  listedTours.set(id, opt);
-
-  return "You liked Tour with ID:" + id;
-}
-
-// UNLIKE
-export function unLikeTour(id: string): string {
-  let storedTour = listedTours.getSome(id);
-  if (storedTour.like.includes(context.sender)) {
-    let id = storedTour.like.findIndex((data) => data == context.sender);
-    if (id != -1) {
-      storedTour.like.splice(id, 1);
+  if (storedTour.dislike.includes(context.sender)) {
+    let uid = storedTour.dislike.findIndex((data) => data == context.sender);
+    if (uid != -1) {
+      storedTour.dislike.splice(uid, 1);
     }
   }
 
-  listedTours.set(id, storedTour);
-  return "You unliked Tour with ID:" + id;
+  if (storedTour.like.includes(context.sender)) {
+    let uid = storedTour.like.findIndex((data) => data == context.sender);
+    if (uid != -1) {
+      storedTour.like.splice(uid, 1);
+    }
+    listedTours.set(id, storedTour);
+    return "You unliked Tour with ID:" + id;
+  }
+
+  const opt = storedTour.likeTour();
+  listedTours.set(id, opt);
+
+  return "You liked Tour with ID:" + id;
 }
 
 // DISLIKE
 export function dislikeTour(id: string): string {
   let storedTour = listedTours.getSome(id);
 
-  const opts = !storedTour.dislike.includes(context.sender);
-  const check = !storedTour.like.includes(context.sender);
-
-  assert(opts, "You have already disliked this tour");
-  assert(check, "You have already made an impression on this tour");
-
-  const opt = storedTour.dislikeTour();
-
-  listedTours.set(id, opt);
-
-  return "You disliked Tour with ID:" + id;
-}
-
-// UNDISLIKE
-export function unDislikeTour(id: string): string {
-  let storedTour = listedTours.getSome(id);
-  if (storedTour.dislike.includes(context.sender)) {
-    let id = storedTour.dislike.findIndex((data) => data == context.sender);
-    if (id != -1) {
-      storedTour.dislike.splice(id, 1);
+  if (storedTour.like.includes(context.sender)) {
+    let uid = storedTour.like.findIndex((data) => data == context.sender);
+    if (uid != -1) {
+      storedTour.like.splice(uid, 1);
     }
   }
 
-  listedTours.set(id, storedTour);
-  return "You undisliked Tour with ID:" + id;
+  if (storedTour.dislike.includes(context.sender)) {
+    let uid = storedTour.dislike.findIndex((data) => data == context.sender);
+    if (uid != -1) {
+      storedTour.dislike.splice(uid, 1);
+    }
+    listedTours.set(id, storedTour);
+    return "You undisliked Tour with ID:" + id;
+  }
+
+  const opt = storedTour.dislikeTour();
+  listedTours.set(id, opt);
+
+  return "You disliked Tour with ID:" + id;
 }
 
 /*
