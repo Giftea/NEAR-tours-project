@@ -1,3 +1,4 @@
+import { tourID } from './../../utils';
 import { Tour, listedTours, TourParam, tourIds } from "./models/tourModel";
 import { ContractPromiseBatch, context } from "near-sdk-as";
 import { Comment, tourComments } from "./models/commentModel";
@@ -7,12 +8,14 @@ import { Rate, tourRates } from "./models/rateModel";
 CREATE NEW TOUR
 */
 export function setTour(tour: TourParam): string {
-  let storedTour = listedTours.get(tour.id);
+  const tourId = generateuniqueID(); // generates unique ID
+
+  let storedTour = listedTours.get(tourId);
   if (storedTour !== null) {
-    throw new Error(`a tour with ${tour.id} already exists`);
+    throw new Error(`a tour with ${tourId} already exists`);
   }
-  tourIds.push(tour.id);
-  listedTours.set(tour.id, Tour.fromPayload(tour));
+  tourIds.push(tourId);
+  listedTours.set(tourId, Tour.fromPayload(tourId, tour));
   return "Tour Created!";
 }
 
@@ -142,10 +145,12 @@ export function dislikeTour(id: string): string {
 COMMENTS ON TOUR
 */
 export function commentOnTour(comment: Comment): string {
+  const commentId = generateuniqueID(); // generates unique ID
+
   let tour = listedTours.getSome(comment.tourId);
 
-  tourComments.set(comment.id, Comment.fromPayload(comment));
-  let storedComment = tourComments.getSome(comment.id);
+  tourComments.set(commentId, Comment.fromPayload(commentId, comment));
+  let storedComment = tourComments.getSome(commentId);
   let opt = tour.comment(storedComment);
   listedTours.set(tour.id, opt);
   return "You commented on Tour with ID:" + comment.tourId;
@@ -156,6 +161,8 @@ RATE TOUR
 */
 
 export function rateTour(rate: Rate): string {
+  const rateId = generateuniqueID(); // generates unique ID
+
   let tour = listedTours.getSome(rate.tourId);
   let found = false;
 
@@ -168,9 +175,18 @@ export function rateTour(rate: Rate): string {
 
   assert(!found, "You have already rated this Tour");
 
-  tourRates.set(rate.id, Rate.fromPayload(rate));
-  let storedRate = tourRates.getSome(rate.id);
+  tourRates.set(rateId, Rate.fromPayload(rateId, rate));
+  let storedRate = tourRates.getSome(rateId);
   let opt = tour.rate(storedRate);
   listedTours.set(tour.id, opt);
   return "You rated Tour with ID:" + rate.tourId;
+}
+
+
+/**
+ * generates a random ID 
+ */
+ function generateuniqueID(): tourID {
+  const id = "ID-" + context.blockTimestamp.toString();
+  return id;
 }

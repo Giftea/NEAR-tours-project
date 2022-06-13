@@ -38,9 +38,9 @@ export class Tour {
   rates: Rate[];
   createdAt: u64;
 
-  public static fromPayload(payload: TourParam): Tour {
+  public static fromPayload(tourId: tourID, payload: TourParam): Tour {
     const tour = new Tour();
-    tour.id = payload.id;
+    tour.id = tourId;
     tour.name = payload.name;
     tour.description = payload.description;
     tour.images = payload.images;

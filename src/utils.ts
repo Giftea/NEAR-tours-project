@@ -12,7 +12,7 @@ export const TxFee = u128.from("520000000000000000000000");
 export const creator = "giftea.testnet";
 
 export const tour: TourParam = {
-  id: "01928",
+  id: "ID-42",
   name: "The Forest Hiker",
   images: ["img"],
   imageCover: "img",
@@ -34,4 +34,5 @@ export const rate: Rate = {
   tourId: tour.id,
   rate: 2,
   owner: creator,
+  createdAt: 2393439489
 };

@@ -1,4 +1,5 @@
 import { PersistentUnorderedMap, context } from "near-sdk-as";
+import { tourID } from "../../../utils";
 
 @nearBindgen
 export class Comment {
@@ -8,9 +9,9 @@ export class Comment {
   commenter: string;
   createdAt: u64;
 
-  public static fromPayload(payload: Comment): Comment {
+  public static fromPayload(commentId: tourID, payload: Comment): Comment {
     const comment = new Comment();
-    comment.id = payload.id;
+    comment.id = commentId;
     comment.tourId = payload.tourId;
     comment.comment = payload.comment;
     comment.commenter = context.sender;
